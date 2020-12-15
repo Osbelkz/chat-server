@@ -5,8 +5,7 @@ const io = require("socket.io")(http, {
         origin: "*",
         methods: ["GET", "POST"],
     }
-})
-
+});
 app.get('/', (req, res) => {
     res.send("hello from server");
 });
