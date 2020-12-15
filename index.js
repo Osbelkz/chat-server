@@ -1,9 +1,15 @@
-const io = require("socket.io")(5000, {
+const app = require('express')();
+const http = require('http').createServer(app);
+const io = require("socket.io")(http, {
     cors: {
         origin: "*",
         methods: ["GET", "POST"],
     }
 })
+
+app.get('/', (req, res) => {
+    res.send("hello from server");
+});
 
 io.on("connection", socket => {
     console.log("connected")
@@ -20,3 +26,9 @@ io.on("connection", socket => {
         })
     })
 })
+
+const PORT = process.env.PORT || 3008;
+
+http.listen(PORT, () => {
+    console.log('listening on *:3008');
+});
